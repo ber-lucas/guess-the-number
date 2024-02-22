@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "owG1bkan+1f8nlBfI3EkcX50PAVYVfOfJE0Zn4+WM7w=",
+  "Source": "guess-the-number",
+  "BasePath": "_content/guess-the-number",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
