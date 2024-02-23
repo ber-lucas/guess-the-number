@@ -5,11 +5,12 @@ using Microsoft.EntityFrameworkCore;
 namespace guessTheNumer.data;
 
 public class AppDbContext : DbContext {
-  DbSet<Player> Players { get; set; }
-  DbSet<Game> Games { get; set; }
+  public DbSet<Player> Players { get; set; }
+  public DbSet<Game> Games { get; set; }
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
     optionsBuilder.UseSqlite("Data Source=db.sqlite");
+    base.OnConfiguring(optionsBuilder);
   }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder) {
@@ -27,5 +28,7 @@ public class AppDbContext : DbContext {
       .WithOne(e => e.Winner)
       .HasForeignKey(e => e.WinnerId)
       .IsRequired(false);
+
+    base.OnModelCreating(modelBuilder);
   }
 }
