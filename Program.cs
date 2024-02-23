@@ -1,4 +1,5 @@
 using guessTheNumer.data;
+using guessTheNumer.player;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,5 +20,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.AddPlayerRoutes();
 
 app.Run();

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using guessTheNumer.data;
 
@@ -10,9 +11,11 @@ using guessTheNumer.data;
 namespace guess_the_number.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240223213152_bugFix:initial")]
+    partial class bugFixinitial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
@@ -38,15 +41,6 @@ namespace guess_the_number.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("EndedOn")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Moves")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("PlayOn")
-                        .HasColumnType("TEXT");
-
                     b.Property<Guid?>("WinnerId")
                         .HasColumnType("TEXT");
 
@@ -61,13 +55,6 @@ namespace guess_the_number.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Moves")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
