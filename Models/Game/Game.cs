@@ -4,24 +4,22 @@ using Microsoft.EntityFrameworkCore;
 namespace guessTheNumer.game;
 
 public class Game {
-  
   public Guid Id { get; init; }
-  public List<Player> Players { get; } = [];
-  public Guid? WinnerId { get; set; }
-  public Player? Winner { get; set; }
-  private DateTime PlayOn { get; init; }
-  private DateTime EndedOn { get; set; }
-  private int Moves { get; set; }
+  public List<Player> Players { get; }
+  public Guid? WinnerId { get; private set; }
+  public Player? Winner { get; private set; }
+  public DateTime PlayOn { get; init; }
+  public DateTime? EndedOn { get; private set; }
+  public int Moves { get; private set; }
 
   public Game() {}
   public Game(List<Player> players) {
     Id = Guid.NewGuid();
-    
-    //Add players
-    foreach(var p in players) {
-      Players.Add(p);
-    }
-
+    Players = [ .. players ];
+    WinnerId = null;
+    Winner = null;
     PlayOn = DateTime.Now;
+    EndedOn = null;
+    Moves = 0;
   }
 }
