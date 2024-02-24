@@ -11,6 +11,7 @@ public class Game {
   public DateTime PlayOn { get; init; }
   public DateTime? EndedOn { get; private set; }
   public int Moves { get; private set; }
+  public int TargetNumber { get; init; }
 
   public Game() {}
   public Game(List<Player> players) {
@@ -21,5 +22,6 @@ public class Game {
     PlayOn = DateTime.Now;
     EndedOn = null;
     Moves = 0;
+    TargetNumber = new Random().Next(0, 100);
   }
 }

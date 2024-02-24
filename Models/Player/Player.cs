@@ -12,6 +12,7 @@ public class Player {
   public List<Game> Games { get; }
   public List<Game> Victories { get; }
   public int Moves { get; private set; }
+  public bool Active { get; private set; }
 
   public Player() {}
   public Player(string name) {
@@ -20,5 +21,10 @@ public class Player {
     Moves = 0;
     Games = new List<Game>();
     Victories = new List<Game>();
+    Active = true;
+  }
+
+  public void DisablePlayer() {
+    Active = false;
   }
 }
