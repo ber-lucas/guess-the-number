@@ -1,14 +1,14 @@
 using guessTheNumer.data;
+using Microsoft.EntityFrameworkCore;
 
 namespace guessTheNumer.player;
 
-public record PlayerRequest(string Name);
-public record PlayerResponse(string Message, Player Player);
 public static class PlayerRoutes {
   public static void AddPlayerRoutes(this WebApplication app) {
     var playerRoute = app.MapGroup("players");
 
-    playerRoute.MapPost("", async (PlayerRequest request, AppDbContext context) => {
+    // Create Player Route
+    playerRoute.MapPost("", async (CreatePlayerRequest request, AppDbContext context) => {
       var newPlayer = new Player(request.Name);
 
       try {
@@ -17,10 +17,21 @@ public static class PlayerRoutes {
       } catch (Exception) {
         throw new Exception("Error: Unable to create player!");
       }
-
-      var response = new PlayerResponse("Successfully created player!", newPlayer);
       
-      return response;
+      return Results.Ok(newPlayer);
     });
+
+    //Get all players Route
+    playerRoute.MapGet("", async (AppDbContext context) => {
+      List<Player> response;
+      
+      try {
+        response = await context.Players.ToListAsync();
+      } catch (Exception) {
+        throw new Exception("Error: Unable to return all players!");
+      }
+
+      return Results.Ok(response);
+    });    
   }
 }
