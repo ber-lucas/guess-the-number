@@ -26,12 +26,36 @@ public static class PlayerRoutes {
       List<Player> response;
       
       try {
-        response = await context.Players.ToListAsync();
+        response = await context
+            .Players
+            .Where(player => player.Active)
+            .ToListAsync();
       } catch (Exception) {
         throw new Exception("Error: Unable to return all players!");
       }
 
       return Results.Ok(response);
+    });
+
+    //Delete Player Route
+    playerRoute.MapDelete("{id:guid}", async (Guid id, AppDbContext context) => {
+      var player = await context
+        .Players
+        .SingleOrDefaultAsync(player => player.Id == id);
+
+      if(player == null) {
+        return Results.NotFound("Player not found!");
+      }
+
+      player.DisablePlayer();
+
+      try {
+        await context.SaveChangesAsync();
+      } catch(Exception) {
+        throw new Exception("Unable to disable player!");
+      }
+
+      return Results.Ok("Player successfully deleted!");
     });    
   }
 }
